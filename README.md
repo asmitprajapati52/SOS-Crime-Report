@@ -2,21 +2,6 @@
 
 **India's first 100% anonymous crime reporting and emergency response platform**
 
----
-
-## 📋 Table of Contents
-- [Features](#features)
-- [Tech Stack](#tech-stack)
-- [Project Structure](#project-structure)
-- [Installation](#installation)
-- [Environment Setup](#environment-setup)
-- [Running the Application](#running-the-application)
-- [API Documentation](#api-documentation)
-- [Default Credentials](#default-credentials)
-- [All 10 Requested Features](#all-10-requested-features)
-
----
-
 ## ✨ Features
 
 ### Core Features
@@ -29,7 +14,7 @@
 - ✅ **Progressive Ban System** for fake alerts
 - ✅ **Fully Responsive Design** (mobile, tablet, desktop)
 
-### All 10 Requested Features
+### All 10 upcoming Features
 1. **📍 Real-Time GPS Location** - Automatic location capture with accuracy tracking
 2. **🔔 Push Notifications** - Desktop & mobile alerts for important events
 3. **🌐 Multi-Language Support** - Hindi & English (easily extensible)
@@ -389,18 +374,6 @@ Content-Type: application/json
 }
 ```
 
----
-
-## 🎯 All 10 Requested Features 
-- GPS location tracking
-- Push notifications
-- Multi-language support
-- Voice recording
-- OTP verification
-- Emergency contacts
-- Community validation
-- Analytics dashboard
-
 ```bash
 cd backend
 npm start  # Uses node instead of nodemon
@@ -428,10 +401,9 @@ Deploy `frontend/build` folder to static hosting (Vercel, Netlify, etc.)
 8. **Anonymous Reporting** - Optional identity protection
 
 ---
+## License
 
-## 📄 License
-
-MIT License - Feel free to use for educational or commercial purposes
+MIT License © 2026 Asmit Prajapati
 
 ---
 
@@ -465,3 +437,8 @@ MIT License - Feel free to use for educational or commercial purposes
 **Built with ❤️ for India's Safety**
 
 **Sahayata (साहाय्यता) - Your Safety, Our Priority**
+
+## Author
+
+Asmit Prajapati  
+B.Tech CSE Student
