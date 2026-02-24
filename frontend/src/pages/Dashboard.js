@@ -15,7 +15,7 @@ const Dashboard = () => {
     sosAlerts: 0,
     reputation: 100
   });
-  
+
     const loadUserStats = async () => {
     try {
       const reportsRes = await reportAPI.getMy();
@@ -31,10 +31,24 @@ const Dashboard = () => {
     }
   };
 
+useEffect(() => {
+  const loadUserStats = async () => {
+    try {
+      const reportsRes = await reportAPI.getMy();
+      setUserStats(prev => ({
+        ...prev,
+        myReports: reportsRes.data.count || 0,
+        validations: user?.validationsGiven || 0,
+        sosAlerts: user?.sosAlertsTriggered || 0,
+        reputation: user?.reputation || 100
+      }));
+    } catch (error) {
+      console.error('Stats error:', error);
+    }
+  };
 
-  useEffect(() => {
-    loadUserStats();
-  }, [loadUserStats]);
+  loadUserStats();
+}, [user]);
 
 
   return (

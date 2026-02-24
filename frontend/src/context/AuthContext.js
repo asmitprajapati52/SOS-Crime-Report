@@ -27,13 +27,25 @@ export const AuthProvider = ({ children }) => {
   };
 
   useEffect(() => {
-    if (token) {
-      axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
-      loadUser();
-    } else {
+  const loadUser = async () => {
+    try {
+      const res = await axios.get('/api/auth/me');
+      setUser(res.data.data);
+    } catch (error) {
+      console.error('Load user error:', error);
+      logout();
+    } finally {
       setLoading(false);
     }
-  }, [token]);
+  };
+
+  if (token) {
+    axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
+    loadUser();
+  } else {
+    setLoading(false);
+  }
+}, [token]);
 
   const login = async (email, password) => {
     const res = await axios.post('/api/auth/login', { email, password });
