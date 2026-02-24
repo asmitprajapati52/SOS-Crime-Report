@@ -16,21 +16,7 @@ const Dashboard = () => {
     reputation: 100
   });
 
-    const loadUserStats = async () => {
-    try {
-      const reportsRes = await reportAPI.getMy();
-      setUserStats(prev => ({
-        ...prev,
-        myReports: reportsRes.data.count || 0,
-        validations: user?.validationsGiven || 0,
-        sosAlerts: user?.sosAlertsTriggered || 0,
-        reputation: user?.reputation || 100
-      }));
-    } catch (error) {
-      console.error('Stats error:', error);
-    }
-  };
-
+  
 useEffect(() => {
   const loadUserStats = async () => {
     try {
