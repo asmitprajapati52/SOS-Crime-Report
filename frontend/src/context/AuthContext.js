@@ -14,14 +14,14 @@ export const AuthProvider = ({ children }) => {
   const [loading, setLoading] = useState(true);
   const [token, setToken] = useState(localStorage.getItem('sahayataToken'));
 
-  useEffect(() => {
-    if (token) {
-      axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
-      loadUser();
-    } else {
-      setLoading(false);
-    }
-  }, [token]);
+useEffect(() => {
+  if (token) {
+    axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
+    loadUser();
+  } else {
+    setLoading(false);
+  }
+}, [token, loadUser]);
 
   const loadUser = async () => {
     try {

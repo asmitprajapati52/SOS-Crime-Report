@@ -18,7 +18,7 @@ const Dashboard = () => {
 
   useEffect(() => {
     loadUserStats();
-  }, []);
+  }, [loadUserStats]);
 
   const loadUserStats = async () => {
     try {
