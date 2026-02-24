@@ -24,7 +24,7 @@ const limiter = rateLimit({
 // Middleware
 app.use(helmet()); // Security headers
 app.use(cors({
-  origin: process.env.FRONTEND_URL || 'http://localhost:3000',
+  origin: process.env.FRONTEND_URL || 'https://sahayata-sos.netlify.app',
   credentials: true
 }));
 app.use(compression()); // Compress responses
@@ -81,7 +81,7 @@ const server = app.listen(PORT, () => {
 ║   🛡️  Sahayata SOS Server Running     ║
 ║   📡 Port: ${PORT}                        ║
 ║   🌍 Environment: ${process.env.NODE_ENV || 'development'}        ║
-║   🔗 API: http://localhost:${PORT}        ║
+║   🔗 API: sahayata-sos.netlify.app       ║
 ╚════════════════════════════════════════╝
   `);
 });
