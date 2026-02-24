@@ -1,5 +1,5 @@
 import React, { createContext, useState, useContext, useEffect } from 'react';
-import axios from 'axios';
+import API from '../utils/api';
 
 const AuthContext = createContext();
 
@@ -16,7 +16,7 @@ export const AuthProvider = ({ children }) => {
 
   const loadUser = async () => {
     try {
-      const res = await axios.get('/api/auth/me');
+      const res = await API.get('/auth/me');
       setUser(res.data.data);
     } catch (error) {
       console.error('Load user error:', error);
@@ -27,41 +27,29 @@ export const AuthProvider = ({ children }) => {
   };
 
   useEffect(() => {
-  const loadUser = async () => {
-    try {
-      const res = await axios.get('/api/auth/me');
-      setUser(res.data.data);
-    } catch (error) {
-      console.error('Load user error:', error);
-      logout();
-    } finally {
+    if (token) {
+      API.defaults.headers.common['Authorization'] = `Bearer ${token}`;
+      loadUser();
+    } else {
       setLoading(false);
     }
-  };
-
-  if (token) {
-    axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
-    loadUser();
-  } else {
-    setLoading(false);
-  }
-}, [token]);
+  }, [token]);
 
   const login = async (email, password) => {
-    const res = await axios.post('/api/auth/login', { email, password });
+    const res = await API.post('/auth/login', { email, password });
     setToken(res.data.token);
     localStorage.setItem('sahayataToken', res.data.token);
     setUser(res.data.user);
-    axios.defaults.headers.common['Authorization'] = `Bearer ${res.data.token}`;
+    API.defaults.headers.common['Authorization'] = `Bearer ${res.data.token}`;
     return res.data;
   };
 
   const register = async (userData) => {
-    const res = await axios.post('/api/auth/register', userData);
+    const res = await API.post('/auth/register', userData);
     setToken(res.data.token);
     localStorage.setItem('sahayataToken', res.data.token);
     setUser(res.data.user);
-    axios.defaults.headers.common['Authorization'] = `Bearer ${res.data.token}`;
+    API.defaults.headers.common['Authorization'] = `Bearer ${res.data.token}`;
     return res.data;
   };
 
@@ -69,7 +57,7 @@ export const AuthProvider = ({ children }) => {
     setUser(null);
     setToken(null);
     localStorage.removeItem('sahayataToken');
-    delete axios.defaults.headers.common['Authorization'];
+    delete API.defaults.headers.common['Authorization'];
   };
 
   return (
