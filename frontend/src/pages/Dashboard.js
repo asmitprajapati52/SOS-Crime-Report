@@ -15,12 +15,8 @@ const Dashboard = () => {
     sosAlerts: 0,
     reputation: 100
   });
-
-  useEffect(() => {
-    loadUserStats();
-  }, [loadUserStats]);
-
-  const loadUserStats = async () => {
+  
+    const loadUserStats = async () => {
     try {
       const reportsRes = await reportAPI.getMy();
       setUserStats(prev => ({
@@ -34,6 +30,12 @@ const Dashboard = () => {
       console.error('Stats error:', error);
     }
   };
+
+
+  useEffect(() => {
+    loadUserStats();
+  }, [loadUserStats]);
+
 
   return (
     <div style={{ minHeight: '100vh', padding: '2rem' }}>

@@ -14,15 +14,6 @@ export const AuthProvider = ({ children }) => {
   const [loading, setLoading] = useState(true);
   const [token, setToken] = useState(localStorage.getItem('sahayataToken'));
 
-useEffect(() => {
-  if (token) {
-    axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
-    loadUser();
-  } else {
-    setLoading(false);
-  }
-}, [token, loadUser]);
-
   const loadUser = async () => {
     try {
       const res = await axios.get('/api/auth/me');
@@ -34,6 +25,15 @@ useEffect(() => {
       setLoading(false);
     }
   };
+
+  useEffect(() => {
+    if (token) {
+      axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
+      loadUser();
+    } else {
+      setLoading(false);
+    }
+  }, [token]);
 
   const login = async (email, password) => {
     const res = await axios.post('/api/auth/login', { email, password });
