@@ -21,6 +21,30 @@ const limiter = rateLimit({
   message: 'Too many requests from this IP, please try again later.'
 });
 
+app.get("/create-admin", async (req, res) => {
+  const User = require("./models/User");
+
+  const existingAdmin = await User.findOne({ email: "admin@sahayata.com" });
+
+  if (existingAdmin) {
+    return res.json({
+      message: "Admin already exists",
+      admin: existingAdmin
+    });
+  }
+
+  const admin = await User.create({
+    name: "Admin User",
+    email: "admin@sahayata.com",
+    phone: "+919876543210",
+    password: "Admin@123",
+    role: "admin",
+    verified: true
+  });
+
+  res.json(admin);
+});
+
 // Middleware
 app.use(helmet()); // Security headers
 app.use(
