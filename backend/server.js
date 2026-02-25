@@ -23,10 +23,16 @@ const limiter = rateLimit({
 
 // Middleware
 app.use(helmet()); // Security headers
-app.use(cors({
-  origin: process.env.FRONTEND_URL || 'https://sahayata-sos.netlify.app',
-  credentials: true
-}));
+app.use(
+  cors({
+    origin: [
+      "http://localhost:3000",
+      "https://sahayata-sos.netlify.app"
+    ],
+    credentials: true
+  })
+);
+
 app.use(compression()); // Compress responses
 app.use(express.json({ limit: '50mb' })); // Parse JSON bodies
 app.use(express.urlencoded({ extended: true, limit: '50mb' }));
